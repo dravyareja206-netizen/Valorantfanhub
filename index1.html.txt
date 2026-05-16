@@ -1,0 +1,43 @@
+index1.html: 
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <title>VALORANT | Home</title>
+</head>
+<body>
+    <nav>
+       
+        <div class="logo">VALORANT</div>
+        <div class="nav-links">
+            <a href="index1.html" class="active">Home</a>
+            <a href="agents.html">Agents</a>
+            <a href="maps.html">Maps</a>
+            <a href="official site.html">Official Site</a>
+            <a href="range.html">The Range</a>
+        </div>
+        
+    </nav>
+ 
+    <div class="container" style="display: flex; flex-direction: column; justify-content: center;">
+        <p style="color: var(--red); letter-spacing: 5px;">A 5V5 CHARACTER-BASED TACTICAL SHOOTER</p>
+        <h1 class="hero-title">DEFY THE<br><span style="color: transparent; -webkit-text-stroke: 2px var(--white);">LIMITS</span></h1>
+        <div style="margin-top: 30px;">
+            <a href="agents.html" class="val-btn">Play Free Now</a>
+        </div>
+    </div>
+    <script>
+        document.body.style.opacity = 0;
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.style.transition = "opacity 0.8s ease";
+            document.body.style.opacity = 1;
+        });
+    </script>
+ 
+ 
+ 
+</body>
+</html>
+ 

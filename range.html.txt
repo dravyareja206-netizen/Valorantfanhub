@@ -1,0 +1,137 @@
+range.html:
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <title>VALORANT | Range</title>
+</head>
+<body>
+    <nav>
+        
+        <div class="logo">VALORANT</div>
+        <div class="nav-links">
+            <a href="index1.html">Home</a>
+            <a href="agents.html">Agents</a>
+            <a href="maps.html">Maps</a>
+            <a href="official site.html">Official Site</a>
+            <a href="range.html" class="active">The Range</a>
+        </div>
+        
+    </nav>
+ 
+    
+    <main class="range-wrapper">
+        <header class="range-header">
+            <h1>PRACTICE RANGE</h1>
+            <p>WARM UP YOUR REFLEXES BEFORE THE MATCH</p>
+        </header>
+ 
+        <section id="game-container">
+            <div id="game-ui">
+                <div class="stat-box">
+                    <span>SCORE</span>
+                    <h2 id="score">0</h2>
+                </div>
+                <div class="stat-box">
+                    <span>TIME</span>
+                    <h2 id="timer">30</h2>
+                </div>
+                <button id="start-btn" class="val-btn">START TRAINING</button>
+            </div>
+ 
+            <div id="target-field">
+                <div class="field-overlay">
+                    <p id="game-msg">READY UP, AGENT</p>
+                </div>
+               
+            </div>
+        </section>
+    </main>
+    
+    </main>
+</main>
+<script>let score = 0;
+    let timeLeft = 30;
+    let gameActive = false;
+    let timerInterval;
+    
+    const targetField = document.getElementById('target-field');
+    const scoreDisplay = document.getElementById('score');
+    const timerDisplay = document.getElementById('timer');
+    const startBtn = document.getElementById('start-btn');
+    const gameMsg = document.getElementById('game-msg');
+    
+    function spawnTarget() {
+        if (!gameActive) return;
+        
+        targetField.innerHTML = "";
+        const target = document.createElement('div');
+        target.classList.add('target');
+        
+        
+        const x = Math.random() * (targetField.offsetWidth - 60);
+        const y = Math.random() * (targetField.offsetHeight - 60);
+        
+        target.style.left = `${x}px`;
+        target.style.top = `${y}px`;
+        
+        target.onclick = (e) => {
+            e.stopPropagation();
+            score++;
+            scoreDisplay.innerText = score;
+            spawnTarget();
+        };
+        
+        targetField.appendChild(target);
+    }
+    
+    function startGame() {
+        score = 0;
+        timeLeft = 30;
+        gameActive = true;
+        scoreDisplay.innerText = score;
+        timerDisplay.innerText = timeLeft;
+        startBtn.disabled = true;
+        startBtn.style.opacity = "0.5";
+        gameMsg.innerText = "";
+    
+        spawnTarget();
+    
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.innerText = timeLeft;
+    
+            if (timeLeft <= 5) {
+                timerDisplay.style.color = "#ff4655";
+            }
+    
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }, 1000);
+    }
+    
+    function endGame() {
+        gameActive = false;
+        clearInterval(timerInterval);
+        targetField.innerHTML = `
+            <div class="field-overlay">
+            <h1 style="color:#ff4655; font-size:3rem;">TRAINING COMPLETE</h1>
+            <p style="font-size:1.5rem;">FINAL SCORE: ${score}</p>
+        </div>
+        `;
+        startBtn.disabled = false;
+        startBtn.style.opacity = "1";
+        startBtn.innerText = "TRY AGAIN";
+        timerDisplay.style.color = "white";
+    }
+    
+    startBtn.onclick = startGame;</script>
+ 
+ 
+ 
+</body>
+</html>
+ 

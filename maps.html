@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALORANT | All Maps</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .maps-hero {
+            height: 40vh;
+            background: linear-gradient(rgba(15, 25, 35, 0.9), rgba(15, 25, 35, 0.9)), 
+                        url('https://images.contentstack.io/v3/assets/blt731eb9a2ef3ad227/blt63619277d34120f2/648937083811804e38e1f0e4/E7A1_Sunset_Loading_Screen_1920x1080.jpg');
+            background-size: cover;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        #map-list { padding: 80px 10%; display: grid; gap: 40px; }
+
+        /* The Tactical Entry Layout */
+        .map-entry {
+            display: flex; background: var(--dark);
+            border-left: 5px solid var(--red);
+            transition: 0.4s; overflow: hidden;
+        }
+
+        .map-entry:nth-child(even) { flex-direction: row-reverse; border-left: none; border-right: 5px solid var(--red); }
+
+        .map-img-container { flex: 1.2; height: 350px; overflow: hidden; }
+        .map-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; opacity: 0.8; }
+        
+        .map-text { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .map-text h2 { font-size: 3.5rem; font-style: italic; margin: 10px 0; text-transform: uppercase; }
+        .map-text .loc { color: var(--red); letter-spacing: 3px; font-size: 0.8rem; }
+        .map-text .type { background: rgba(255,255,255,0.1); width: fit-content; padding: 2px 10px; font-size: 0.7rem; margin-top: 10px; }
+
+        .map-entry:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 70, 85, 0.2); }
+        .map-entry:hover img { transform: scale(1.1); opacity: 1; }
+
+        @media (max-width: 900px) { .map-entry, .map-entry:nth-child(even) { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        
+        <div class="logo">VALORANT</div>
+        <div class="nav-links">
+            <a href="index1.html">Home</a>
+            <a href="agents.html">Agents</a>
+            <a href="maps.html" class="active">Maps</a>
+            <a href="official site.html">Official Site</a>
+            <a href="range.html">The Range</a>
+        </div>
+        
+    </nav>
+
+    <header class="maps-hero">
+        <h1 class="hero-title">MAP ARCHIVE</h1>
+    </header>
+
+    <div id="map-list">
+        </div>
+
+    <script>
+        const allMaps = [
+            // STANDARD POOL
+            { name: "Corrode", loc: "Mont-Saint-Michel, France", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/6/6f/Loading_Screen_Corrode.png/revision/latest?cb=20250624201813", desc: "A medieval French castle turned mining facility featuring industrial machinery and layered defenses." },
+            { name: "Abyss", loc: "Sør-Jan, Norway", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/6/61/Loading_Screen_Abyss.png/revision/latest?cb=20240730145619", desc: "A clandestine base buried in a chasm. Beware: there are no borders—don't fall off." },
+            { name: "Sunset", loc: "Los Angeles, USA", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/5/5c/Loading_Screen_Sunset.png/revision/latest?cb=20230829125442", desc: "A classic three-lane map set in the vibrant streets of LA, featuring a heavy focus on mid control." },
+            { name: "Lotus", loc: "Western Ghats, India", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/d/d0/Loading_Screen_Lotus.png/revision/latest?cb=20230106163526", desc: "Ancient ruins with three bomb sites and unique rotating stone door mechanics." },
+            { name: "Pearl", loc: "Lisbon, Portugal", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/a/af/Loading_Screen_Pearl.png/revision/latest?cb=20220622132842", desc: "An underwater city on Omega Earth with no gimmicks—just pure tactical gunplay." },
+            { name: "Fracture", loc: "New Mexico, USA", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/f/fc/Loading_Screen_Fracture.png/revision/latest?cb=20210908143656", desc: "An H-shaped facility where attackers can pinch defenders from both sides." },
+            { name: "Breeze", loc: "Bermuda Triangle", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/1/10/Loading_Screen_Breeze.png/revision/latest?cb=20260106175937", desc: "Large open spaces and long-range sightlines. Perfect for snipers." },
+            { name: "Icebox", loc: "Siberia, Russia", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/1/13/Loading_Screen_Icebox.png/revision/latest?cb=20250730171440", desc: "A frozen container yard with horizontal ziplines and extreme verticality." },
+            { name: "Ascent", loc: "Venice, Italy", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/e/e7/Loading_Screen_Ascent.png/revision/latest?cb=20200607180020", desc: "The ultimate playground featuring mechanical doors that can be toggled by switches." },
+            { name: "Haven", loc: "Thimphu, Bhutan", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/7/70/Loading_Screen_Haven.png/revision/latest?cb=20200620202335", desc: "A unique map with three bomb sites, requiring defenders to spread their resources thin." },
+            { name: "Bind", loc: "Rabat, Morocco", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/2/23/Loading_Screen_Bind.png/revision/latest?cb=20200620202316", desc: "Two sites with no middle ground. Features two one-way teleporters for rapid rotations." },
+            { name: "Split", loc: "Tokyo, Japan", type: "Standard", img: "https://static.wikia.nocookie.net/valorant/images/d/d6/Loading_Screen_Split.png/revision/latest?cb=20230411161807", desc: "A vertically dense map with rope ascenders and a focus on controlling high-ground 'Heaven'." },
+            
+            // TEAM DEATHMATCH (TDM)
+            { name: "Glitch", loc: "Simulated World", type: "TDM", img: "https://i.ytimg.com/vi/ZGgwNOgiSLY/sddefault.jpg", desc: "A neon-soaked simulation where Haven meets Sunset in a fast-paced arena." },
+            { name: "Drift", loc: "Thailand", type: "TDM", img: "https://imguscdn.gamespress.com/cdn/files/RiotGames/2023/11/282053-eed0e846/Drift_Screenshot_04.png?w=750&mode=max&otf=y&quality=90&format=png&bgcolor=transparent&sky=3efeeffa6e2fe36b44d5c2284c1435a9593bc0115867521cd0ed6a7ec50fb123", desc: "A floating market with a zip-line that cuts through the center for high-risk plays." },
+            { name: "District", loc: "Tokyo, Japan", type: "TDM", img: "https://cdna.artstation.com/p/assets/images/images/078/038/504/large/r-wei-district-3d-mid-01-weiren.jpg?1721043423", desc: "A tight urban alleyway designed for constant engagements and flanking." },
+            { name: "Kasbah", loc: "Rabat, Morocco", type: "TDM", img: "https://pbs.twimg.com/media/FzWD5BzaEAAwR7e.jpg", desc: "A multi-layered arena based on the Bind theme, focusing on central domination." },
+            { name: "Piazza", loc: "Venice, Italy", type: "TDM", img: "https://pbs.twimg.com/amplify_video_thumb/1669325318153461763/img/sNq8L4B1TWP_WjV9.jpg", desc: "An open Venetian square where long sightlines meet narrow corridor escapes." },
+            
+            // PRACTICE
+            { name: "The Range", loc: "Venice, Italy", type: "Practice", img: "https://static.wikia.nocookie.net/valorant/images/7/78/Range_Shooting_Range.png/revision/latest?cb=20230707103624", desc: "A safe haven for agents to practice their aim, utility, and movement." }
+        ];
+
+        const list = document.getElementById('map-list');
+
+        allMaps.forEach(map => {
+            const entry = document.createElement('div');
+            entry.className = 'map-entry';
+            entry.innerHTML = `
+                <div class="map-img-container">
+                    <img src="${map.img}" alt="${map.name}">
+                </div>
+                <div class="map-text">
+                    <span class="loc">// ${map.loc}</span>
+                    <div class="type">${map.type}</div>
+                    <h2>${map.name}</h2>
+                    <p class="map-desc">${map.desc}</p>
+                </div>
+            `;
+            list.appendChild(entry);
+        });
+    </script>
+
+<script>
+    document.body.style.opacity = 0;
+    window.addEventListener('DOMContentLoaded', () => {
+        document.body.style.transition = "opacity 0.8s ease";
+        document.body.style.opacity = 1;
+    });
+</script>
+
+<div class="cta-section">
+    <p style="color: var(--gray);">THINK YOU HAVE WHAT IT TAKES?</p>
+    
+    <div class="button-group">
+        <a href="index1.html" class="val-btn">Back to Base</a>
+        <a href="official site.html" class="val-btn">Go to Official Site</a>
+        <a href="range.html" class="val-btn">Practice at the Range</a>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 40px; color: #c8baba; border-top: 1px solid #1a1a1a;">
+<p>This is a fan project and is not affiliated with Riot Games.  Made by The A-STARS: Dravya, Advaith, Seonho, Alriz</p>
+</footer>
+
+</body>
+</html> 
